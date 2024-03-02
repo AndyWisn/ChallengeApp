@@ -1,23 +1,19 @@
-﻿var name = "Ewa";
-var sex = 'K';      // Płeć: K/k - kobieta,  M/m mężczyzna,  I/i - inna
-byte age = 30;
+﻿
+int number = 1223330076;
 
-// Zakładam, że Ewa to zawsze kobieta, inaczej warunki się nieco skomplikują
+byte[] counters = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
-if ((sex == 'K') || (sex == 'k'))
+string numberInString = number.ToString();
+char[] letters = numberInString.ToArray();
+
+for (var i = 0; i < letters.Length; i++)
 {
-    if (age < 30)
-    {
-        Console.WriteLine("Kobieta poniżej 30 lat");
-    }
-    else if (age == 30 && name == "Ewa")
-    {
-        Console.WriteLine("Ewa, lat 30");
-    }
-}
-else if ((sex == 'M' || sex == 'm') && (age < 18))
-{
-    Console.WriteLine("Niepłnoletni mężczyzna");
+    counters[(byte)Char.GetNumericValue(letters[i])]++;
+
 }
 
+for (var i = 0; i < 10; i++)
+{
+    Console.WriteLine(i + " => " + counters[i]);
+}
 
