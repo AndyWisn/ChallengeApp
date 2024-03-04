@@ -1,19 +1,46 @@
-﻿
-int number = 1223330076;
+﻿using ChallengeApp;
 
-byte[] counters = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+List<Employee> Employees = new List<Employee>();
 
-string numberInString = number.ToString();
-char[] letters = numberInString.ToArray();
+Employees.Add(new Employee("Ada", "Kowalska", 46));
+Employees.Add(new Employee("Anna", "Kowalska", 36));
+Employees.Add(new Employee("Jan", "Kowalski", 26));
 
-for (var i = 0; i < letters.Length; i++)
+Console.WriteLine("Employees:");
+Console.WriteLine("");
+
+Random randomScore = new Random();
+
+foreach (Employee emp in Employees)
 {
-    counters[(byte)Char.GetNumericValue(letters[i])]++;
-
+    for (var i = 0; i < 5; i++) emp.AddScore(randomScore.Next(1, 10));
+    Console.WriteLine(emp.name + " " + emp.surname + " Age:" + emp.age + " Score: " + emp.Result);
 }
 
-for (var i = 0; i < 10; i++)
+Employee employeeMax = new Employee("", "", 0);
+employeeMax.AddScore(0);
+
+foreach (Employee emp in Employees)
 {
-    Console.WriteLine(i + " => " + counters[i]);
+    if (emp.Result > employeeMax.Result) employeeMax = emp;
 }
+
+Console.WriteLine("");
+Console.WriteLine("Hi score: " + employeeMax.Result + " Employee: " + employeeMax.name + " " + employeeMax.surname + " Age:" + employeeMax.age);
+
+
+
+
+
+
+
+
+
+
+//var result = user1.Result;
+//Console.WriteLine(result);
+//var name = User.gameName;
+//var pi = Math.PI;
+
+
 
