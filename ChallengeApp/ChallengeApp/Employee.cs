@@ -21,10 +21,13 @@
             get { return this.score.Sum(); }
         }
 
-        public void AddScore(int score)
+        public void AddScore(int score)                 //add score
         {
             this.score.Add(score);
-
+        }
+        public void SubScore(int score)                 //substract score
+        {
+            this.score.Add(-score);
         }
     }
 }
