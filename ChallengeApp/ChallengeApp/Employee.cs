@@ -16,6 +16,12 @@
 
         }
 
+        public Employee(string name)
+        {
+            this.name = name;
+                   
+        }
+
         public int Result
         {
             get { return this.score.Sum(); }

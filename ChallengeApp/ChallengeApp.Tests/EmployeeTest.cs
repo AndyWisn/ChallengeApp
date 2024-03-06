@@ -4,14 +4,13 @@ namespace ChallengeApp.Tests
 {
     public class Tests
     {
-          
+
         [Test]
         public void WhenEmployeeCollectScoresShouldReturnCorrectSum()
         {
 
             //arrange
-            
-            var Employee = new Employee("Andrzej","Wiœniewski",46);
+            var Employee = new Employee("Andrzej", "Wiœniewski", 46);
             Employee.AddScore(5);
             Employee.SubScore(5);
             Employee.AddScore(6);
@@ -19,16 +18,12 @@ namespace ChallengeApp.Tests
 
 
             // act
-
             int result = Employee.Result;
 
             // assert
-
             Assert.AreEqual(0, result);
 
         }
-
-      
 
 
     }
