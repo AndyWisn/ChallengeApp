@@ -11,9 +11,9 @@ namespace ChallengeApp.Tests
             Statistics stat = Employee.GetStatistics();
 
             // assert
-            Assert.AreEqual(0, stat.Max);
-            Assert.AreEqual(0, stat.Min);
-            Assert.AreEqual(0, stat.Average);
+            Assert.That(stat.Max,Is.EqualTo(0));
+            Assert.That(stat.Min, Is.EqualTo(0));
+            Assert.That(stat.Average, Is.EqualTo(0));
         }
 
         [Test]
@@ -29,8 +29,8 @@ namespace ChallengeApp.Tests
             Statistics stat = Employee.GetStatistics();
 
             // assert
-            Assert.AreEqual(1, stat.Min);
-            Assert.AreEqual(3, stat.Max);
+            Assert.That(stat.Min, Is.EqualTo(1));
+            Assert.That(stat.Max, Is.EqualTo(3));
         }
 
         [Test]
@@ -47,7 +47,8 @@ namespace ChallengeApp.Tests
             Statistics stat = Employee.GetStatistics();
 
             // assert
-            Assert.AreEqual(3.33, Math.Round(stat.Average,2));
+            Assert.That(Math.Round(stat.Average, 2), Is.EqualTo(3.33));
+            
         }
 
 
