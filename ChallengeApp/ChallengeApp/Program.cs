@@ -1,18 +1,29 @@
 ﻿using ChallengeApp;
 
-var employee = new Employee("Andrzej", "Wiśniewski");
-employee.AddGrade("12");                    //string as a number
-employee.AddGrade("Adam");                  //string as not a number
-employee.AddGrade('A');                     //char but not a digit
-employee.AddGrade('1');                     //char as a digit
-employee.AddGrade(Math.PI);                 //double
-employee.AddGrade(2345345345345345);        //long
-employee.AddGrade(5534);                    //int
 
+Console.WriteLine("Witamy w programie XYZ do oceny Pracowników");
+Console.WriteLine("===========================================");
+Console.WriteLine();
+
+var employee = new Employee();
+while (true)
+{
+    Console.WriteLine("Podaj kolejną ocenę pracownika 0-100 lub A/a=100 B/b=80 C/c=60 D/d=40 E/e=20   (Q/q - wyjście): ");
+    string input = Console.ReadLine();
+    if ((input == "q") ^ (input == "Q"))
+    {
+        break;
+    }
+    if ((input == "A") ^ (input == "a") ^ (input == "B") ^ (input == "b") ^ (input == "C") ^ (input == "c") ^ (input == "D") ^ (input == "d") ^ (input == "E") ^ (input == "e"))
+    {
+        employee.AddGrade(input.ToCharArray(0, 1)[0]);
+    }
+    else
+    {
+        employee.AddGrade(input);
+    }
+}
 var statistics = employee.GetStatistics();
-Console.WriteLine("");
-Console.WriteLine($"Average: {statistics.Average:N2}");
+Console.WriteLine($"Avg: {statistics.Average}");
 Console.WriteLine($"Min: {statistics.Min}");
 Console.WriteLine($"Max: {statistics.Max}");
-Console.WriteLine("");
-
