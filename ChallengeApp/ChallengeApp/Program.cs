@@ -38,7 +38,6 @@ while (true)
         }       
     }
 }
-
 var statistics = employee.GetStatistics();
 Console.WriteLine($"Avg: {statistics.Average}");
 Console.WriteLine($"Min: {statistics.Min}");
