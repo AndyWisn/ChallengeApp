@@ -1,33 +1,18 @@
-﻿using System.Diagnostics.Contracts;
-using System.Net.Http.Headers;
-using System.Runtime.CompilerServices;
+﻿
+using System.ComponentModel.Design;
+using System.Reflection.Metadata;
+using System.Threading.Tasks.Sources;
+using static System.Formats.Asn1.AsnWriter;
 
 namespace ChallengeApp
 {
-    public class Employee : IEmployee
+    public class Supervisor : IEmployee
     {
-        private List<float> grades = new List<float>();
-
-        public Employee(string? name, string? surname)                   
-        {
-            this.Name = name;
-            this.Surname = surname;
-        }
-        public Employee()
-        {
-        }
-
         public string? Name { get; private set; }
         public string? Surname { get; private set; }
-        
-        /*public Employee()
-              : this("no name", "no surname", '?')
-          {
-          }
-          public Employee(string? name, string? surname, char sex)
-              : base(name, surname, sex)
-          {
-          }*/
+
+        private List<float> grades = new List<float>();
+
 
         public void AddGrade(float grade)
         {
@@ -40,15 +25,62 @@ namespace ChallengeApp
                 throw new Exception("Invalid grade value");
             }
         }
-        public void AddGrade(string? grade)
+        public void AddGrade(string grade)
         {
-            if (float.TryParse(grade, out float result))
+            if ((!string.IsNullOrWhiteSpace(grade)) && (grade.Length < 3))
             {
-                this.AddGrade(result);
+                int signDetect = 0;
+                int stringscore = 0;
+                foreach (char a in grade)
+                {
+                    switch (a)
+                    {
+                        case '+':
+                            signDetect = 5;
+                            break;
+                        case '-':
+                            signDetect = -5;
+                            break;
+                        case '6':
+                            stringscore = 100;
+                            break;
+                        case '5':
+                            stringscore = 80;
+                            break;
+                        case '4':
+                            stringscore = 60;
+                            break;
+                        case '3':
+                            stringscore = 40;
+                            break;
+                        case '2':
+                            stringscore = 20;
+                            break;
+                        case '1':
+                        case '0':
+                            stringscore = 0;
+                            break;
+                        default:
+                            throw new Exception("Unsupported grade");
+                    }
+                }
+                stringscore += signDetect;
+                if (stringscore < 0)
+                {
+                    this.AddGrade(0);
+                }
+                else if (stringscore > 100)
+                {
+                    this.AddGrade(100);
+                }
+                else
+                {
+                    this.AddGrade(stringscore);
+                }
             }
             else
             {
-                throw new Exception("String is not float");
+                throw new Exception("Wrong grade string");
             }
         }
         public void AddGrade(char grade)
@@ -79,6 +111,7 @@ namespace ChallengeApp
                     throw new Exception("Wrong Letter");
             }
         }
+
         public void AddGrade(ulong grade)
         {
             this.AddGrade((float)grade);
@@ -125,7 +158,6 @@ namespace ChallengeApp
                 statistics.Min = 0;
                 statistics.Max = 0;
             }
-
             switch (statistics.Average)
             {
                 case var a when a >= 80:
@@ -144,7 +176,6 @@ namespace ChallengeApp
                     statistics.AverageLetter = 'E';
                     break;
             }
-
             return statistics;
         }
     }

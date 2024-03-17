@@ -1,6 +1,6 @@
 namespace ChallengeApp.Tests
 {
-    public class Tests
+    public class EmployeeTests
     {
         [Test]
         public void WhenGradesCountIsZeroGetStatistics2ShouldReturnAllZeroes()
