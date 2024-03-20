@@ -4,11 +4,17 @@ Console.WriteLine("Witamy w programie XYZ do oceny Pracowników");
 Console.WriteLine("===========================================");
 Console.WriteLine();
 
-var employee = new Employee();
+var employee = new EmployeeInFile();
+
+if (File.Exists(EmployeeInFile.fileName))
+{
+    File.Delete(EmployeeInFile.fileName);
+}
+
 
 while (true)
 {
-    Console.WriteLine("Podaj kolejną ocenę pracownika 0-100 lub A/a=100 B/b=80 C/c=60 D/d=40 E/e=20   (Q/q - wyjście): ");
+    Console.WriteLine("Podaj kolejną ocenę pracownika 1-6(-/+) lub A/a=100 B/b=80 C/c=60 D/d=40 E/e=20   (Q/q - wyjście): ");
     string? input = Console.ReadLine();
     if ((input == "q") ^ (input == "Q"))
     {
