@@ -4,20 +4,29 @@ namespace ChallengeApp
 {
     public abstract class EmployeeBase : IEmployee
     {
+        public delegate void GradeAddedDelegate(object sender, EventArgs args);
+        public abstract event GradeAddedDelegate GradeAdded;
+
         public EmployeeBase(string name, string surname)
         {
             this.Name = name;
             this.Surname = surname;
+            this.GradeAdded += this.EmployeeGradeAdded;
         }
         public EmployeeBase()
         {
             this.Name = null;
             this.Surname = null;
+            this.GradeAdded += this.EmployeeGradeAdded;
         }
 
         public string Name { get; set; }
         public string Surname { get; set; }
 
+        public void EmployeeGradeAdded(object sender, EventArgs args)
+        {
+            Console.WriteLine("Dodano nową ocenę");
+        }
 
         public abstract void AddGrade(float grade);
 
@@ -71,8 +80,6 @@ namespace ChallengeApp
         {
             this.AddGrade((float)grade);
         }
-
         public abstract Statistics GetStatistics();
-        
     }
 }

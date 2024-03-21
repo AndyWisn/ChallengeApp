@@ -1,20 +1,21 @@
 ﻿using ChallengeApp;
+using System.Reflection;
 
 Console.WriteLine("Witamy w programie XYZ do oceny Pracowników");
 Console.WriteLine("===========================================");
 Console.WriteLine();
 
-var employee = new EmployeeInFile();
+var employee1 = new EmployeeInMemory();
+var employee2 = new EmployeeInFile();
 
 if (File.Exists(EmployeeInFile.fileName))
 {
     File.Delete(EmployeeInFile.fileName);
 }
 
-
 while (true)
 {
-    Console.WriteLine("Podaj kolejną ocenę pracownika 1-6(-/+) lub A/a=100 B/b=80 C/c=60 D/d=40 E/e=20   (Q/q - wyjście): ");
+    Console.WriteLine("Enter the employee's next grade. Range: 1-6(-/+) or A/a=100 B/b=80 C/c=60 D/d=40 E/e=20   (Q/q - quit): ");
     string? input = Console.ReadLine();
     if ((input == "q") ^ (input == "Q"))
     {
@@ -24,7 +25,8 @@ while (true)
     {
         try
         {
-            employee.AddGrade(input.ToCharArray(0, 1)[0]);
+            employee1.AddGrade(input.ToCharArray(0, 1)[0]);
+            employee2.AddGrade(input.ToCharArray(0, 1)[0]);
         }
         catch (Exception e)
         {
@@ -35,15 +37,23 @@ while (true)
     {
         try
         {
-            employee.AddGrade(input);
-        }
+            employee1.AddGrade(input);
+            employee2.AddGrade(input);
+        }       
         catch (Exception e)
         {
             Console.WriteLine($"Exception catched: {e.Message}");
-        }       
+        }   
     }
 }
-var statistics = employee.GetStatistics();
+var statistics = employee1.GetStatistics();
+Console.WriteLine("Statistics from memory:");
+Console.WriteLine($"Avg: {statistics.Average}");
+Console.WriteLine($"Min: {statistics.Min}");
+Console.WriteLine($"Max: {statistics.Max}");
+
+statistics = employee2.GetStatistics();
+Console.WriteLine("Statistics from file:");
 Console.WriteLine($"Avg: {statistics.Average}");
 Console.WriteLine($"Min: {statistics.Min}");
 Console.WriteLine($"Max: {statistics.Max}");
