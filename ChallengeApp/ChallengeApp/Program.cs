@@ -5,8 +5,8 @@ Console.WriteLine("Witamy w programie XYZ do oceny Pracowników");
 Console.WriteLine("===========================================");
 Console.WriteLine();
 
-var employee1 = new EmployeeInMemory();
-var employee2 = new EmployeeInFile();
+var employee1 = new EmployeeInMemory("Andrzej","Wiśniewski");
+var employee2 = new EmployeeInFile("Andrzej","Wiśniewski");
 
 if (File.Exists(EmployeeInFile.fileName))
 {

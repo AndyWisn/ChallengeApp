@@ -13,10 +13,6 @@ namespace ChallengeApp
             this.Surname = surname;
             this.GradeAdded += this.EmployeeGradeAdded;
         }
-        public EmployeeBase()
-        {
-          this.GradeAdded += this.EmployeeGradeAdded;
-        }
 
         public string? Name { get; set; }
         public string? Surname { get; set; }

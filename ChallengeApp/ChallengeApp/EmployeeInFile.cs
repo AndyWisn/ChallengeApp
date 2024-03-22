@@ -7,14 +7,10 @@ namespace ChallengeApp
         public override event GradeAddedDelegate? GradeAdded;
         public const string fileName = "grades.txt";
 
-       // public EmployeeInFile(string name, string surname)
-       //    : base(name, surname)
-       // {
-       // }
-       // public EmployeeInFile()
-       //     :base()
-       // {
-       // }
+        public EmployeeInFile(string name, string surname)
+                : base(name, surname)
+        {
+        }
 
         public override void AddGrade(float grade)
         {
