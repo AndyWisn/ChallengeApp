@@ -4,17 +4,17 @@ namespace ChallengeApp
 {
     public class EmployeeInFile : EmployeeBase
     {
-        public override event GradeAddedDelegate GradeAdded;
+        public override event GradeAddedDelegate? GradeAdded;
         public const string fileName = "grades.txt";
 
-        public EmployeeInFile(string name, string surname)
-            : base(name, surname)
-        {
-        }
-        public EmployeeInFile()
-            : base()
-        {
-        }
+       // public EmployeeInFile(string name, string surname)
+       //    : base(name, surname)
+       // {
+       // }
+       // public EmployeeInFile()
+       //     :base()
+       // {
+       // }
 
         public override void AddGrade(float grade)
         {
@@ -35,7 +35,7 @@ namespace ChallengeApp
             }
         }
 
-        public override void AddGrade(string grade)
+        public override void AddGrade(string? grade)
         {
             if ((!string.IsNullOrWhiteSpace(grade)) && (grade.Length < 3))
             {
@@ -76,34 +76,24 @@ namespace ChallengeApp
                 }
                 stringscore += signDetect;
 
-                using (var writer = File.AppendText(fileName))
-                {
                     if (stringscore < 0)
                     {
-                        writer.WriteLine(0);
-
+                        this.AddGrade(0);
                     }
                     else if (stringscore > 100)
                     {
-                        writer.WriteLine(100);
-
+                        this.AddGrade(100);
                     }
                     else
                     {
-                        writer.WriteLine(stringscore);
-                    }
-                    if (GradeAdded != null)
-                    {
-                        GradeAdded(this, new EventArgs());
-                    }
-                }
+                        this.AddGrade(stringscore);
+                    }                
             }
             else
             {
                 throw new Exception("Wrong grade string");
             }
         }
-
         public override Statistics GetStatistics()
         {
             var statistics = new Statistics();
@@ -117,7 +107,7 @@ namespace ChallengeApp
                 using (var reader = File.OpenText(fileName))
                 {
 
-                    string line = null;
+                    string? line = null;
 
                     while ((line = reader.ReadLine()) != null)
                     {

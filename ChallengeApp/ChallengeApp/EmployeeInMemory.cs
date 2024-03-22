@@ -2,20 +2,9 @@
 {
     internal class EmployeeInMemory : EmployeeBase
     {
-
-        public override event GradeAddedDelegate GradeAdded;
-
+        public override event GradeAddedDelegate? GradeAdded;
         private List<float> grades = new List<float>();
-        public EmployeeInMemory(string name, string surname)
-            : base(name, surname)
-        {            
-            
-        }
-        
-        public EmployeeInMemory()
-            : base()
-        {
-        }
+   
         public override void AddGrade(float grade)
         {
             if (grade >= 0 && grade <= 100)
@@ -26,15 +15,13 @@
                 {
                     GradeAdded(this, new EventArgs());
                 }
-
             }
             else
             {
                 throw new Exception("Invalid grade value");
             }
         }
-
-        public override void AddGrade(string grade)
+        public override void AddGrade(string? grade)
         {
             if ((!string.IsNullOrWhiteSpace(grade)) && (grade.Length < 3))
             {
@@ -92,12 +79,10 @@
                 throw new Exception("Wrong grade string");
             }
         }
-
         public override Statistics GetStatistics()
         {
             var statistics = new Statistics();
             statistics.Average = 0;
-
             if (this.grades.Count > 0)
             {
                 statistics.Max = float.MinValue;
@@ -119,7 +104,6 @@
                 statistics.Min = 0;
                 statistics.Max = 0;
             }
-
             switch (statistics.Average)
             {
                 case var a when a >= 80:
@@ -138,9 +122,7 @@
                     statistics.AverageLetter = 'E';
                     break;
             }
-
             return statistics;
         }
-
     }
 }

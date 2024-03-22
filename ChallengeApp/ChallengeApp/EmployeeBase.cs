@@ -15,13 +15,11 @@ namespace ChallengeApp
         }
         public EmployeeBase()
         {
-            this.Name = null;
-            this.Surname = null;
-            this.GradeAdded += this.EmployeeGradeAdded;
+          this.GradeAdded += this.EmployeeGradeAdded;
         }
 
-        public string Name { get; set; }
-        public string Surname { get; set; }
+        public string? Name { get; set; }
+        public string? Surname { get; set; }
 
         public void EmployeeGradeAdded(object sender, EventArgs args)
         {
@@ -30,7 +28,7 @@ namespace ChallengeApp
 
         public abstract void AddGrade(float grade);
 
-        public abstract void AddGrade(string grade);
+        public abstract void AddGrade(string? grade);
 
         public void AddGrade(char grade)
         {
