@@ -1,6 +1,4 @@
-﻿using System.Xml.Linq;
-
-namespace ChallengeApp
+﻿namespace ChallengeApp
 {
     public abstract class EmployeeBase : IEmployee
     {

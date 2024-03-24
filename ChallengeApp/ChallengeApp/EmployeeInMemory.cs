@@ -1,8 +1,8 @@
 ﻿namespace ChallengeApp
 {
-    internal class EmployeeInMemory : EmployeeBase
+    public class EmployeeInMemory : EmployeeBase
     {
-        public override event GradeAddedDelegate? GradeAdded;
+        public override event GradeAddedDelegate GradeAdded;
         private List<float> grades = new List<float>();
 
         public EmployeeInMemory(string name, string surname)
@@ -86,46 +86,12 @@
         public override Statistics GetStatistics()
         {
             var statistics = new Statistics();
-            statistics.Average = 0;
-            if (this.grades.Count > 0)
+
+            foreach(var grade in this.grades)
             {
-                statistics.Max = float.MinValue;
-                statistics.Min = float.MaxValue;
-                foreach (var grade in this.grades)
-                {
-                    if (grade < 0)
-                    {
-                        continue;
-                    }
-                    statistics.Max = Math.Max(statistics.Max, grade);
-                    statistics.Min = Math.Min(statistics.Min, grade);
-                    statistics.Average += grade;
-                }
-                statistics.Average = statistics.Average / this.grades.Count;
+                statistics.AddGrade(grade);
             }
-            else
-            {
-                statistics.Min = 0;
-                statistics.Max = 0;
-            }
-            switch (statistics.Average)
-            {
-                case var a when a >= 80:
-                    statistics.AverageLetter = 'A';
-                    break;
-                case var a when a >= 60:
-                    statistics.AverageLetter = 'B';
-                    break;
-                case var a when a >= 40:
-                    statistics.AverageLetter = 'C';
-                    break;
-                case var a when a >= 20:
-                    statistics.AverageLetter = 'D';
-                    break;
-                default:
-                    statistics.AverageLetter = 'E';
-                    break;
-            }
+
             return statistics;
         }
     }
